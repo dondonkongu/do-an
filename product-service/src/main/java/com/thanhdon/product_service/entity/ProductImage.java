@@ -1,9 +1,6 @@
 package com.thanhdon.product_service.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,9 +15,13 @@ import lombok.experimental.FieldDefaults;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long imageId;
 
-    Long productId;
+    String color;
     String imageUrl;
     Boolean isMain ;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id",nullable = false)
+    Product product;
 
 
 }

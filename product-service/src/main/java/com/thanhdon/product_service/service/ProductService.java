@@ -29,6 +29,9 @@ public class ProductService {
 
         return productMapper.toProductResponse(productRepository.save(product));
     }
+    public ProductResponse getProductById(Long id){
+        return productMapper.toProductResponse(productRepository.findById(id).orElseThrow(()->new RuntimeException("product not found !!")));
+    }
 
     public List<ProductResponse> getAllProducts(){
         return productRepository.findAll().stream().map(productMapper::toProductResponse).toList();

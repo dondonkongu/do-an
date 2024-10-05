@@ -25,14 +25,14 @@ public class Product {
     BigDecimal price;
     Integer quantity;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
+    List<ProductImage> productImage;
+
     @ManyToOne
     Subcategory subcategory;
 
     @ManyToOne
     SubSubcategory subsubcategory;
-
-    @OneToMany
-    List<ProductColor> colors;
 
 
 

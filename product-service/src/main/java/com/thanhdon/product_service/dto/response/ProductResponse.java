@@ -1,6 +1,6 @@
 package com.thanhdon.product_service.dto.response;
 
-import com.thanhdon.product_service.entity.ProductColor;
+import com.thanhdon.product_service.entity.ProductImage;
 import com.thanhdon.product_service.entity.SubSubcategory;
 import com.thanhdon.product_service.entity.Subcategory;
 import lombok.*;
@@ -23,7 +23,7 @@ public class ProductResponse {
     Integer quantity;
     Subcategory subcategory;
     SubSubcategory subsubcategory;
-    List<ProductColor> colors;
+    List<ProductImage> productImages;
 
 
 
