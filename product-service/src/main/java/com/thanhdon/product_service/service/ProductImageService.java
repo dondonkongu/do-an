@@ -45,7 +45,7 @@ public class ProductImageService {
     public void addImageToProduct(Long productId, ProductImage productImage ) {
         Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("product not found"));
         productImage.setProduct(product);
-        product.getProductImage().add(productImage);
+        product.getProductImages().add(productImage);
         productRepository.save(product);
     }
 

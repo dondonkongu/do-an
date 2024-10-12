@@ -3,6 +3,8 @@ package com.thanhdon.product_service.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 
 @Data
 @Builder
@@ -13,6 +15,8 @@ public class SubcategoryCreationRequest {
 
     String name;
     String description;
+
+
 
 
 

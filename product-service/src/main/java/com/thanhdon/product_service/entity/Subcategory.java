@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -14,13 +16,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long subcategoryId;
-
+    Long id;
     String name;
-
-    @ManyToOne
-    Category category;
-
     String description;
 
 

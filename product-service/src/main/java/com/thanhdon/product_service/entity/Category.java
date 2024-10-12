@@ -22,9 +22,9 @@ public class Category {
     String name;
     String description;
 
-    @OneToMany
+    @ManyToMany
     List<Subcategory> subcategories;
 
-    // Getters and Setters
+
 }
 

@@ -1,7 +1,7 @@
 package com.thanhdon.product_service.dto.response;
 
+import com.thanhdon.product_service.entity.Category;
 import com.thanhdon.product_service.entity.ProductImage;
-import com.thanhdon.product_service.entity.SubSubcategory;
 import com.thanhdon.product_service.entity.Subcategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,7 +22,7 @@ public class ProductResponse {
     BigDecimal price;
     Integer quantity;
     Subcategory subcategory;
-    SubSubcategory subsubcategory;
+    Category category;
     List<ProductImage> productImages;
 
 

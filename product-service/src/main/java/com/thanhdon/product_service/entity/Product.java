@@ -26,13 +26,13 @@ public class Product {
     Integer quantity;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
-    List<ProductImage> productImage;
+    List<ProductImage> productImages;
 
     @ManyToOne
     Subcategory subcategory;
 
     @ManyToOne
-    SubSubcategory subsubcategory;
+    Category category;
 
 
 

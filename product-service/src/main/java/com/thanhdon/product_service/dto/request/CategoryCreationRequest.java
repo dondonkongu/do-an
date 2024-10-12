@@ -21,7 +21,7 @@ public class CategoryCreationRequest {
     String name;
     String description;
 
-    List<Subcategory> subcategories;
+    List<String> subcategories;
 
 
 

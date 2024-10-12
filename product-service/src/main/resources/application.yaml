@@ -1,10 +1,21 @@
 server:
   port: 8080
   servlet:
-    context-path: /products
+    context-path: /dt-store
 
 spring:
   application:
     name: product-service
   datasource:
-    url:
+    url: "jdbc:mysql://localhost:3306/dt_store"
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+cloudinary:
+  cloud-name: "dsqnuw08w"
+  api-key: "354647218553839"
+  api-secret: "x4Sjq3-djVHRWyIEtJIdCiqkgmc"

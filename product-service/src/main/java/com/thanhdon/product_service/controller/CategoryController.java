@@ -23,7 +23,7 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping()
-    ApiResponse<CategoryResponse> createCategory(CategoryCreationRequest request){
+    ApiResponse<CategoryResponse> createCategory(@RequestBody CategoryCreationRequest request){
         return ApiResponse.<CategoryResponse>builder()
                 .result(categoryService.createCategory(request))
                 .build();

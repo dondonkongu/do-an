@@ -1,6 +1,6 @@
 package com.thanhdon.product_service.dto.request;
 
-import com.thanhdon.product_service.entity.SubSubcategory;
+import com.thanhdon.product_service.entity.Category;
 import com.thanhdon.product_service.entity.Subcategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +20,7 @@ public class ProductCreationRequest {
     BigDecimal price;
     Integer quantity;
     Subcategory subcategory;
-    SubSubcategory subsubcategory;
+    Category category;
 
 
 
