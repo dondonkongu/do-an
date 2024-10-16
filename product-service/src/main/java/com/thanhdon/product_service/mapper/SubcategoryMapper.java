@@ -4,7 +4,7 @@ import com.thanhdon.product_service.dto.request.SubcategoryCreationRequest;
 import com.thanhdon.product_service.dto.response.SubcategoryResponse;
 import com.thanhdon.product_service.entity.Subcategory;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
 
 
 @Mapper(componentModel = "spring")

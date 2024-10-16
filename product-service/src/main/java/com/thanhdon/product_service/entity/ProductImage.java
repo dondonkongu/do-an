@@ -15,7 +15,10 @@ import lombok.experimental.FieldDefaults;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long imageId;
 
-    String color;
+    @ManyToOne
+    @JoinColumn(name = "color_id", nullable = false)  //
+    ProductColor color;
+
     String imageUrl;
     Boolean isMain ;
 

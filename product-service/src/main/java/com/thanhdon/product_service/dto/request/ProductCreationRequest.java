@@ -1,11 +1,18 @@
 package com.thanhdon.product_service.dto.request;
 
 import com.thanhdon.product_service.entity.Category;
+import com.thanhdon.product_service.entity.ProductImage;
+import com.thanhdon.product_service.entity.Size;
 import com.thanhdon.product_service.entity.Subcategory;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @Data
@@ -16,11 +23,23 @@ import java.math.BigDecimal;
 public class ProductCreationRequest {
 
     String name;
+    String productCode;
     String description;
     BigDecimal price;
-    Integer quantity;
-    Subcategory subcategory;
-    Category category;
+    List<String> sizes;
+    String material;
+
+
+    Integer quantity; // so luong ton kho
+    Integer soldQuantity; // so luong da ban
+
+    List<ProductImage> productImages;
+
+    String subcategory;
+
+    String category;
+    String origin;
+    Double discount;
 
 
 

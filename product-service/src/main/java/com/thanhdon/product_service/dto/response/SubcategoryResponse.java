@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SubcategoryResponse {
-
+    Long id;
     String name;
     String description;
 

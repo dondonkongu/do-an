@@ -21,9 +21,16 @@ public class Product {
     Long id;
 
     String name;
+    String productCode;
     String description;
     BigDecimal price;
-    Integer quantity;
+    @ManyToMany
+    List<Size> sizes;
+    String material;
+
+
+    Integer quantity; // so luong ton kho
+    Integer soldQuantity; // so luong da ban
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
     List<ProductImage> productImages;
@@ -34,7 +41,8 @@ public class Product {
     @ManyToOne
     Category category;
 
-
+    String origin;
+    Double discount;
 
 
 }
