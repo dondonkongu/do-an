@@ -35,11 +35,10 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
     List<ProductImage> productImages;
 
-    @ManyToOne
-    Subcategory subcategory;
 
-    @ManyToOne
-    Category category;
+    String subcategory;
+
+    String category;
 
     String origin;
     Double discount;

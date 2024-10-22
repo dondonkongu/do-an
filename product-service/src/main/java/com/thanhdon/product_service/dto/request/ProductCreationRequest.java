@@ -30,13 +30,12 @@ public class ProductCreationRequest {
     String material;
 
 
-    Integer quantity; // so luong ton kho
-    Integer soldQuantity; // so luong da ban
+    Integer quantity;
+    Integer soldQuantity;
 
-    List<ProductImage> productImages;
+    List<ProductImageCreationRequest> productImages;
 
     String subcategory;
-
     String category;
     String origin;
     Double discount;

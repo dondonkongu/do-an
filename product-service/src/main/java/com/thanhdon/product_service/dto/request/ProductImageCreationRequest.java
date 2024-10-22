@@ -10,11 +10,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductImageCreationRequest {
-    Long productId;
-    Long colorId;
+    String colorName;
     String imageUrl;
     Boolean isMain ;
-
 
 }
 

@@ -12,8 +12,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductImageResponse {
     Long imageId;
-    Long productId;
-
     String imageUrl;
     ProductColor color;
     Boolean isMain ;
