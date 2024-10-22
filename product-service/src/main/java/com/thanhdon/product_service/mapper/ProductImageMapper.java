@@ -10,6 +10,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ProductImageMapper {
     @Mapping(target = "color", ignore = true)
+    @Mapping(target = "imageUrl", ignore = true)
+
     public ProductImage toProductImage(ProductImageCreationRequest request);
     public ProductImageResponse toProductImageResponse(ProductImage productImage);
 }
