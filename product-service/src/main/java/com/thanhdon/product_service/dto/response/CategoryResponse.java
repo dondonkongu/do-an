@@ -1,7 +1,6 @@
 package com.thanhdon.product_service.dto.response;
 
 
-import com.thanhdon.product_service.entity.Subcategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,8 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryResponse {
+    Long id;
     String name;
-    String description;
-
-    List<Subcategory> subcategories;
 }

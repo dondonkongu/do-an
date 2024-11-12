@@ -22,31 +22,28 @@ import java.util.List;
 public class CategoryService {
     CategoryRepository categoryRepository;
     CategoryMapper categoryMapper;
-    SubcategoryRepository subcategoryRepository;
 
     public CategoryResponse createCategory(CategoryCreationRequest request){
         Category category = categoryMapper.toCategory(request);
         if(categoryRepository.existsByName(category.getName())) throw new RuntimeException("category existed");
-
-        var subcategories = subcategoryRepository.findAllByNameIn(request.getSubcategories());
-
-        category.setSubcategories(subcategories);
-
         return categoryMapper.toCategoryResponse(categoryRepository.save(category));
     }
 
     public List<CategoryResponse> getAllCategories(){
         return categoryRepository.findAll().stream().map(categoryMapper::toCategoryResponse).toList();
     }
+
+    public CategoryResponse getCategoryById(Long id){
+         return categoryMapper.toCategoryResponse(categoryRepository.findById(id)
+                 .orElseThrow(() -> new RuntimeException("Category not found")));
+    }
     public void deleteCategory(Long id){
        categoryRepository.deleteById(id);
     }
 
-    public CategoryResponse updateCategory(Long idCategory, CategoryUpdateRequest request){
-        Category category = categoryRepository.findById(idCategory).orElseThrow(()-> new RuntimeException("category not found"));
-
-        categoryMapper.updateCategory(category,request);
-        category.setSubcategories(subcategoryRepository.findAllByNameIn(request.getSubcategories()));
+    public CategoryResponse updateCategory(Long id, CategoryCreationRequest request) {
+       Category category = categoryRepository.findById(id).orElseThrow(()->new RuntimeException("category not found"));
+        category.setName(request.getName());
         return categoryMapper.toCategoryResponse(categoryRepository.save(category));
     }
 }

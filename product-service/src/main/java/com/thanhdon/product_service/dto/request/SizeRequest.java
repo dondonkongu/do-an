@@ -3,6 +3,10 @@ package com.thanhdon.product_service.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -10,5 +14,11 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SizeRequest {
     String name;
-    String description;
+    int quantity;
+    int sold;
+
+
+
+
 }
+

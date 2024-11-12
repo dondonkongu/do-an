@@ -1,10 +1,5 @@
 package com.thanhdon.product_service.dto.response;
 
-import com.thanhdon.product_service.dto.request.ProductImageCreationRequest;
-import com.thanhdon.product_service.entity.Category;
-import com.thanhdon.product_service.entity.ProductImage;
-import com.thanhdon.product_service.entity.Size;
-import com.thanhdon.product_service.entity.Subcategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -23,14 +18,11 @@ public class ProductResponse {
     String description;
     BigDecimal price;
     Integer quantity;
-    String subcategory;
     String material;
-    List<Size> sizes;
-    Integer soldQuantity;
-    String category;
-    List<ProductImageResponse> productImages;
+    Long categoryId;
     String origin;
     Double discount;
+    List<ProductImageResponse> images;
 
 
 

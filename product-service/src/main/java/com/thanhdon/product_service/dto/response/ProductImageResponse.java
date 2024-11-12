@@ -1,8 +1,9 @@
 package com.thanhdon.product_service.dto.response;
 
-import com.thanhdon.product_service.entity.ProductColor;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 
 @Data
@@ -13,7 +14,8 @@ import lombok.experimental.FieldDefaults;
 public class ProductImageResponse {
     Long imageId;
     String imageUrl;
-    ProductColor color;
+    List<SizeResponse> sizes;
+    String color;
     Boolean isMain ;
 
 

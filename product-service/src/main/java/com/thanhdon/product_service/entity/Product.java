@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,27 +22,20 @@ public class Product {
     Long id;
 
     String name;
-    String productCode;
+    String code;
     String description;
     BigDecimal price;
-    @ManyToMany
-    List<Size> sizes;
     String material;
-
-
-    Integer quantity; // so luong ton kho
-    Integer soldQuantity; // so luong da ban
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
-    List<ProductImage> productImages;
-
-
-    String subcategory;
-
-    String category;
-
     String origin;
     Double discount;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
+    List<ProductImage> images = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    Category category;
+
 
 
 }

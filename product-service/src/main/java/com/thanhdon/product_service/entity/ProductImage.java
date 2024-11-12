@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -15,11 +17,10 @@ import lombok.experimental.FieldDefaults;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long imageId;
 
-    @ManyToOne
-    @JoinColumn(name = "color_id", nullable = false)  //
-    ProductColor color;
-
-    String imageUrl;
+    String url;
+    String color;
+    @OneToMany
+    List<Size> sizes;
     Boolean isMain ;
 
     @ManyToOne
