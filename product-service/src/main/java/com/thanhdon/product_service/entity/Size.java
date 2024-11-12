@@ -19,6 +19,10 @@ public class Size {
     int quantity;
     int sold;
 
+    @ManyToOne
+    @JoinColumn(name = "product_image_id")
+    ProductImage productImage;
+
 
 
 }

@@ -6,13 +6,10 @@ import com.thanhdon.product_service.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-
-
-@Mapper(componentModel = "spring")
-
+@Mapper(componentModel = "spring", uses = {ProductImageMapper.class})
 public interface ProductMapper {
-    @Mapping(target = "category")
+    @Mapping(target = "category", ignore = true)
+    Product toProduct(ProductCreationRequest request);
 
-    public Product toProduct(ProductCreationRequest request);
-    public ProductResponse toProductResponse(Product product);
+    ProductResponse toProductResponse(Product product);
 }

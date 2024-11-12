@@ -1,5 +1,6 @@
 package com.thanhdon.product_service.dto.response;
 
+import com.thanhdon.product_service.dto.request.ProductImageCreationRequest;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,11 +16,11 @@ import java.util.List;
 public class ProductResponse {
     Long id;
     String name;
+    String code;
     String description;
     BigDecimal price;
-    Integer quantity;
     String material;
-    Long categoryId;
+    CategoryResponse category;
     String origin;
     Double discount;
     List<ProductImageResponse> images;

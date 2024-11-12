@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductImageCreationRequest {
     String url;
     String color;
-    List<SizeRequest> size;
+    List<SizeRequest> sizes;
     Boolean isMain ;
 
 }

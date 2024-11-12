@@ -1,5 +1,6 @@
 package com.thanhdon.product_service.dto.response;
 
+import com.thanhdon.product_service.dto.request.SizeRequest;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,10 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductImageResponse {
-    Long imageId;
-    String imageUrl;
-    List<SizeResponse> sizes;
+
+    String url;
     String color;
+    List<SizeResponse> sizes;
     Boolean isMain ;
 
 

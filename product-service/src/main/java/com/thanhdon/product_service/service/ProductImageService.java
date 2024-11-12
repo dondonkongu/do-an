@@ -35,19 +35,18 @@ public class ProductImageService {
         return productImageMapper.toProductImageResponse(productImageRepository.save(productImage));
     }
 
-    // lay danh sach hinh anh cua mot product
     public List<ProductImageResponse> getImagesByProductId(Long productId){
         return productImageRepository.findProductImageByProductId(productId).stream().map(productImageMapper::toProductImageResponse).toList();
     }
 
     // them mot anh vao mot product
 
-    public void addImageToProduct(Long productId, ProductImage productImage ) {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("product not found"));
-        productImage.setProduct(product);
-        product.getProductImages().add(productImage);
-        productRepository.save(product);
-    }
+//    public void addImageToProduct(Long productId, ProductImage productImage ) {
+//        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("product not found"));
+//        productImage.setProduct(product);
+//        product.getProductImages().add(productImage);
+//        productRepository.save(product);
+//    }
 
     public void deleteProductImage(Long imageId){
         productImageRepository.deleteById(imageId);

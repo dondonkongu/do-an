@@ -27,13 +27,13 @@ public class ProductImageController {
                 .result(productImageService.getImagesByProductId(productId))
                 .build();
     }
-    @PostMapping("/{productId}")
-    ApiResponse<Void> addImagesToProduct(@PathVariable("productId") Long productId, ProductImage productImage){
-        productImageService.addImageToProduct(productId,productImage);
-        return ApiResponse.<Void>builder()
-                .message("add image to product successfully!!")
-                .build();
-    }
+//    @PostMapping("/{productId}")
+//    ApiResponse<Void> addImagesToProduct(@PathVariable("productId") Long productId, ProductImage productImage){
+//        productImageService.addImageToProduct(productId,productImage);
+//        return ApiResponse.<Void>builder()
+//                .message("add image to product successfully!!")
+//                .build();
+//    }
 
     @DeleteMapping("/{imageId}")
     ApiResponse<Void> deleteImageProduct(@PathVariable("imageId") Long imageId){

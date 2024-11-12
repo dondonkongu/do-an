@@ -19,7 +19,7 @@ import java.util.List;
 
     String url;
     String color;
-    @OneToMany
+    @OneToMany(mappedBy = "productImage", cascade = CascadeType.ALL)
     List<Size> sizes;
     Boolean isMain ;
 

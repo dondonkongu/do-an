@@ -1,12 +1,12 @@
 package com.thanhdon.product_service.service;
 
 import com.thanhdon.product_service.dto.request.CategoryCreationRequest;
-import com.thanhdon.product_service.dto.request.CategoryUpdateRequest;
+
 import com.thanhdon.product_service.dto.response.CategoryResponse;
 import com.thanhdon.product_service.entity.Category;
 import com.thanhdon.product_service.mapper.CategoryMapper;
 import com.thanhdon.product_service.repository.CategoryRepository;
-import com.thanhdon.product_service.repository.SubcategoryRepository;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
