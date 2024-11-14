@@ -9,10 +9,9 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -28,5 +27,38 @@ public class OrderController {
                 .result(orderService.createOrder(request))
                 .build();
     }
+    @GetMapping
+    ApiResponse<List<OrderResponse>> getAllOrder(){
+        return ApiResponse.<List<OrderResponse>>builder()
+                .result(orderService.getAllOrders())
+                .build();
+    }
+    @GetMapping("/{orderId}")
+    ApiResponse<OrderResponse> getOrderById(@PathVariable String orderId){
+        return ApiResponse.<OrderResponse>builder()
+                .result(orderService.getOrderById(orderId))
+                .build();
+    }
+    @GetMapping("/user/{userId}")
+    ApiResponse<List<OrderResponse>> getAllOrder(@PathVariable String userId){
+        return ApiResponse.<List<OrderResponse>>builder()
+                .result(orderService.getAllOrdersByUserId(userId))
+                .build();
+    }
+
+
+    @DeleteMapping("/{orderId}")
+    ApiResponse<Void> deleteByOrderId(@PathVariable String orderId){
+        return ApiResponse.<Void>builder()
+                .message("order has been deleted!")
+                .build();
+    }
+    @PutMapping("/{orderId}")
+    ApiResponse<OrderResponse> updateOrderById(@PathVariable String orderId, @RequestBody String status){
+        return ApiResponse.<OrderResponse>builder()
+                .result(orderService.updateOrder(orderId,status))
+                .build();
+    }
+
 
 }

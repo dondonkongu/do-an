@@ -1,5 +1,7 @@
 package com.thanhdon.order_service.service;
 
+import com.thanhdon.order_service.constant.Status;
+import com.thanhdon.order_service.dto.ApiResponse;
 import com.thanhdon.order_service.dto.request.OrderRequest;
 import com.thanhdon.order_service.dto.response.OrderResponse;
 import com.thanhdon.order_service.entity.Item;
@@ -27,18 +29,24 @@ public class OrderService {
 
     public OrderResponse createOrder(OrderRequest request) {
         Orders order = orderMapper.toOrder(request);
+        order.setStatus(Status.PENDING.getStatus());
 
-        // Gán trạng thái mặc định và tính toán giá trị tổng
-        order.setStatus("Pending");
+        // Chuyển các items từ request sang entity Item
         List<Item> items = itemMapper.toItemList(request.getItems());
-        BigDecimal totalPrice = order.getItems().stream()
+        items.forEach(item -> item.setOrder(order));  // Liên kết order với item
+
+        // Gán items vào order trước khi tính toán tổng giá trị
+        order.setItems(items);
+
+        // Tính tổng giá trị của đơn hàng
+        BigDecimal totalPrice = items.stream()
                 .map(Item::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         order.setTotalPrice(totalPrice.add(request.getShippingFee()));
 
+        // Lưu đơn hàng vào cơ sở dữ liệu
         Orders savedOrder = orderRepository.save(order);
 
-        // Chuyển đổi đối tượng Orders thành OrderResponse và trả về
         return orderMapper.toOrderResponse(savedOrder);
     }
 
@@ -48,9 +56,24 @@ public class OrderService {
         return orderMapper.toOrderResponse(order);
     }
 
+
     public List<OrderResponse> getAllOrders() {
         return orderRepository.findAll().stream()
                 .map(orderMapper::toOrderResponse)
                 .collect(Collectors.toList());
     }
+
+    public OrderResponse updateOrder(String orderId,String status){
+        Orders order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        order.setStatus(status);
+        return orderMapper.toOrderResponse(order);
+    }
+
+    public List<OrderResponse> getAllOrdersByUserId(String userId) {
+       return orderRepository.findAllByUserId(userId).stream().map(orderMapper::toOrderResponse).toList();
+
+    }
+
 }

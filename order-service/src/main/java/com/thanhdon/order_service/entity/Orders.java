@@ -20,7 +20,7 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.UUID)
     String orderId;
     String userId;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Item> items = new ArrayList<>();
     String status;
     BigDecimal totalPrice;
