@@ -53,7 +53,6 @@ public class ProductService {
                 }
             }
         }
-
         return productMapper.toProductResponse(productRepository.save(product));
     }
 
@@ -72,9 +71,9 @@ public class ProductService {
         return productRepository.findAll().stream().map(productMapper::toProductResponse).toList();
     }
     public void deleteProductById(Long id){
+        if(!productRepository.existsById(id)) throw new RuntimeException("product not found");
         productRepository.deleteById(id);
     }
-
 
 
 }

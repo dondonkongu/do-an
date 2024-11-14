@@ -1,0 +1,18 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /oder
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: "jdbc:mysql://localhost:3306/order"
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
