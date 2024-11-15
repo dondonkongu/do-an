@@ -75,5 +75,16 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    public List<ProductResponse> searchByName(String name){
+        return productRepository.findByNameLike(name).stream()
+                .map(productMapper::toProductResponse)
+                .toList();
+
+    }
+    public List<ProductResponse> filter(List<String> color, List<String> size) {
+        return productRepository.findByColorAndSize(color, size).stream()
+                .map(productMapper::toProductResponse)
+                .toList();
+    }
 
 }

@@ -44,5 +44,17 @@ public class ProductController {
                 .message("delete product successfully !!")
                 .build();
     }
-
+    @GetMapping("/search")
+    ApiResponse<List<ProductResponse>> search(@RequestParam String name){
+        return ApiResponse.<List<ProductResponse>>builder()
+                .result(productService.searchByName(name))
+                .build();
+    }
+    @GetMapping("/filter")
+    ApiResponse<List<ProductResponse>> filter(@RequestParam(required = false) List<String> color,
+                                              @RequestParam(required = false) List<String> size){
+        return ApiResponse.<List<ProductResponse>>builder()
+                .result(productService.filter(color,size))
+                .build();
+    }
 }
