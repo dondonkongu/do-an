@@ -42,7 +42,6 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Category not found"));
         product.setCategory(category);
 
-        // Gán `Product` cho mỗi `ProductImage`
         if (product.getImages() != null) {
             for (ProductImage image : product.getImages()) {
                 image.setProduct(product);
@@ -60,11 +59,23 @@ public class ProductService {
         return productMapper.toProductResponse(productRepository.findById(id).orElseThrow(()->new RuntimeException("product not found !!")));
     }
 
-    public ProductResponse updateProductById(Long id,ProductCreationRequest request){
-            Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException("product not found"));
-            product.setName(request.getName());
-            product.setPrice(request.getPrice());
-            return productMapper.toProductResponse(productRepository.save(product));
+    public ProductResponse updateProductById(Long id, ProductCreationRequest request) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        product.setName(request.getName());
+        product.setCode(request.getCode());
+        product.setDescription(request.getDescription());
+        product.setPrice(request.getPrice());
+        product.setMaterial(request.getMaterial());
+        product.setOrigin(request.getOrigin());
+        product.setDiscount(request.getDiscount());
+
+        var category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        product.setCategory(category);
+
+        return productMapper.toProductResponse(productRepository.save(product));
     }
 
     public List<ProductResponse> getAllProducts(){

@@ -1,5 +1,6 @@
 package com.thanhdon.product_service.controller;
 
+import com.cloudinary.Api;
 import com.thanhdon.product_service.dto.request.CategoryCreationRequest;
 import com.thanhdon.product_service.dto.request.ProductCreationRequest;
 import com.thanhdon.product_service.dto.response.ApiResponse;
@@ -35,6 +36,19 @@ public class ProductController {
     ApiResponse<List<ProductResponse>> getAllProducts(){
         return ApiResponse.<List<ProductResponse>>builder()
                 .result(productService.getAllProducts())
+                .build();
+    }
+    @GetMapping("/{productId}")
+    ApiResponse<ProductResponse> getProductById(@PathVariable Long productId ){
+        return ApiResponse.<ProductResponse>builder()
+                .result(productService.getProductById(productId))
+                .build();
+    }
+    @PutMapping("/{productId}")
+    ApiResponse<ProductResponse> updateProductById(@PathVariable Long productId, @RequestBody ProductCreationRequest request){
+        return ApiResponse.<ProductResponse>builder()
+                .result(productService.updateProductById(productId,request))
+                .message("product has been updated!!")
                 .build();
     }
     @DeleteMapping("/{productId}")
