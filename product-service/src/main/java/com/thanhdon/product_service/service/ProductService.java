@@ -6,6 +6,8 @@ import com.thanhdon.product_service.dto.response.ProductResponse;
 import com.thanhdon.product_service.entity.Product;
 import com.thanhdon.product_service.entity.ProductImage;
 import com.thanhdon.product_service.entity.Size;
+import com.thanhdon.product_service.exception.AppException;
+import com.thanhdon.product_service.exception.ErrorCode;
 import com.thanhdon.product_service.mapper.ProductImageMapper;
 import com.thanhdon.product_service.mapper.ProductMapper;
 import com.thanhdon.product_service.repository.*;
@@ -16,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +37,7 @@ public class ProductService {
         Product product = productMapper.toProduct(request);
 
         if (productRepository.existsByName(product.getName())) {
-            throw new RuntimeException("Product already exists!");
+            throw new AppException(ErrorCode.PRODUCT_EXISTED);
         }
 
         var category = categoryRepository.findById(request.getCategoryId())
@@ -56,7 +58,7 @@ public class ProductService {
     }
 
     public ProductResponse getProductById(Long id){
-        return productMapper.toProductResponse(productRepository.findById(id).orElseThrow(()->new RuntimeException("product not found !!")));
+        return productMapper.toProductResponse(productRepository.findById(id).orElseThrow(()->new AppException(ErrorCode.PRODUCT_NOT_EXISTED)));
     }
 
     public ProductResponse updateProductById(Long id, ProductCreationRequest request) {
