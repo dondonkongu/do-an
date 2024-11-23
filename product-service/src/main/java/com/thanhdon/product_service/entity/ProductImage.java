@@ -21,9 +21,7 @@ import java.util.List;
     @ManyToOne
     @JoinColumn(name = "product_id",nullable = false)
     Product product;
-    @ManyToOne
-    @JoinColumn(name = "product_variant_id")
-    ProductVariant productVariant;
+
 
 
 }

@@ -17,15 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductCreationRequest {
-
     String name;
     String code;
     String description;
     Long categoryId;
-    @OneToMany
-    List<ProductImage> images;
-    Instant createdDate;
-    Instant updatedDate;
+    List<ProductImageCreationRequest> images;
 
 
 

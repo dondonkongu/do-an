@@ -7,9 +7,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 
-@Mapper(componentModel = "spring", uses = {ProductImageMapper.class})
+@Mapper(componentModel = "spring" )
 public interface ProductMapper {
     @Mapping(target = "category", ignore = true)
+    @Mapping(target = "images", ignore = true)
     Product toProduct(ProductCreationRequest request);
 
     ProductResponse toProductResponse(Product product);

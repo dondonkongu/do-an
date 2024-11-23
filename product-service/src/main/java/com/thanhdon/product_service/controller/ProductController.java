@@ -33,45 +33,45 @@ public class ProductController {
                 .build();
     }
 
-    @GetMapping()
-    ApiResponse<PageResponse<ProductResponse>> getAllProducts(
-            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(value = "size", required = false,defaultValue = "5") int size                                          ){
-        return ApiResponse.<PageResponse<ProductResponse>>builder()
-                .result(productService.getAllProducts())
-                .build();
-    }
-    @GetMapping("/{productId}")
-    ApiResponse<ProductResponse> getProductById(@PathVariable Long productId ){
-        return ApiResponse.<ProductResponse>builder()
-                .result(productService.getProductById(productId))
-                .build();
-    }
-    @PutMapping("/{productId}")
-    ApiResponse<ProductResponse> updateProductById(@PathVariable Long productId, @RequestBody ProductCreationRequest request){
-        return ApiResponse.<ProductResponse>builder()
-                .result(productService.updateProductById(productId,request))
-                .message("product has been updated!!")
-                .build();
-    }
-    @DeleteMapping("/{productId}")
-    ApiResponse<Void> deleteCategory(@PathVariable("productId") Long productId){
-        productService.deleteProductById(productId);
-        return ApiResponse.<Void>builder()
-                .message("delete product successfully !!")
-                .build();
-    }
-    @GetMapping("/search")
-    ApiResponse<List<ProductResponse>> search(@RequestParam String name){
-        return ApiResponse.<List<ProductResponse>>builder()
-                .result(productService.searchByName(name))
-                .build();
-    }
-    @GetMapping("/filter")
-    ApiResponse<List<ProductResponse>> filter(@RequestParam(required = false) List<String> color,
-                                              @RequestParam(required = false) List<String> size){
-        return ApiResponse.<List<ProductResponse>>builder()
-                .result(productService.filter(color,size))
-                .build();
-    }
+//    @GetMapping()
+//    ApiResponse<PageResponse<ProductResponse>> getAllProducts(
+//            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+//            @RequestParam(value = "size", required = false,defaultValue = "5") int size                                          ){
+//        return ApiResponse.<PageResponse<ProductResponse>>builder()
+//                .result(productService.getAllProducts())
+//                .build();
+//    }
+//    @GetMapping("/{productId}")
+//    ApiResponse<ProductResponse> getProductById(@PathVariable Long productId ){
+//        return ApiResponse.<ProductResponse>builder()
+//                .result(productService.getProductById(productId))
+//                .build();
+//    }
+//    @PutMapping("/{productId}")
+//    ApiResponse<ProductResponse> updateProductById(@PathVariable Long productId, @RequestBody ProductCreationRequest request){
+//        return ApiResponse.<ProductResponse>builder()
+//                .result(productService.updateProductById(productId,request))
+//                .message("product has been updated!!")
+//                .build();
+//    }
+//    @DeleteMapping("/{productId}")
+//    ApiResponse<Void> deleteCategory(@PathVariable("productId") Long productId){
+//        productService.deleteProductById(productId);
+//        return ApiResponse.<Void>builder()
+//                .message("delete product successfully !!")
+//                .build();
+//    }
+//    @GetMapping("/search")
+//    ApiResponse<List<ProductResponse>> search(@RequestParam String name){
+//        return ApiResponse.<List<ProductResponse>>builder()
+//                .result(productService.searchByName(name))
+//                .build();
+//    }
+//    @GetMapping("/filter")
+//    ApiResponse<List<ProductResponse>> filter(@RequestParam(required = false) List<String> color,
+//                                              @RequestParam(required = false) List<String> size){
+//        return ApiResponse.<List<ProductResponse>>builder()
+//                .result(productService.filter(color,size))
+//                .build();
+//    }
 }

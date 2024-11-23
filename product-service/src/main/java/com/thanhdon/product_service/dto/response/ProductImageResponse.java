@@ -13,13 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductImageResponse {
-
+    Long id;
     String url;
-    String color;
-    List<SizeResponse> sizes;
     Boolean isMain ;
-
-
 
 }
 

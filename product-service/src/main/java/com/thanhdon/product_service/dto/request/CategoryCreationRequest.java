@@ -14,7 +14,7 @@ import java.util.List;
 public class CategoryCreationRequest {
 
     String name;
-
+    String description;
 
 
 }

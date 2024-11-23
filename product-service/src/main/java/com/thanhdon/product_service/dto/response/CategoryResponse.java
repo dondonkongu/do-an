@@ -14,4 +14,7 @@ import java.util.List;
 public class CategoryResponse {
     Long id;
     String name;
+    String description;
+
+
 }

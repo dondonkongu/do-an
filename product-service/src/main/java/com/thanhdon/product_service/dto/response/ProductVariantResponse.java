@@ -1,12 +1,9 @@
 package com.thanhdon.product_service.dto.response;
 
-import com.thanhdon.product_service.dto.request.ProductImageCreationRequest;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.List;
 
 
 @Data
@@ -14,15 +11,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductResponse {
+public class ProductVariantResponse {
     Long id;
-    String name;
-    String code;
-    String description;
-    CategoryResponse category;
+    Long productId;
+    String color;
+    String size;
+    Integer stock;
+    Integer sold;
+    Double price;
+    String sku;
     Instant createdDate;
     Instant updatedDate;
-    List<ProductImageResponse> images;
+
+
+
+
 
 
 

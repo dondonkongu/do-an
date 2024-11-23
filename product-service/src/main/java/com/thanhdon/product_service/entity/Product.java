@@ -27,7 +27,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;
-    @OneToMany
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductImage> images;
 
     Instant createdDate;
