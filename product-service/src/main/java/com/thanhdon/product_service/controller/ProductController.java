@@ -1,6 +1,7 @@
 package com.thanhdon.product_service.controller;
 
 import com.cloudinary.Api;
+import com.thanhdon.product_service.dto.PageResponse;
 import com.thanhdon.product_service.dto.request.CategoryCreationRequest;
 import com.thanhdon.product_service.dto.request.ProductCreationRequest;
 import com.thanhdon.product_service.dto.response.ApiResponse;
@@ -33,8 +34,10 @@ public class ProductController {
     }
 
     @GetMapping()
-    ApiResponse<List<ProductResponse>> getAllProducts(){
-        return ApiResponse.<List<ProductResponse>>builder()
+    ApiResponse<PageResponse<ProductResponse>> getAllProducts(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false,defaultValue = "5") int size                                          ){
+        return ApiResponse.<PageResponse<ProductResponse>>builder()
                 .result(productService.getAllProducts())
                 .build();
     }

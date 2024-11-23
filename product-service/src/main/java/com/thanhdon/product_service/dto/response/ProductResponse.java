@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 
@@ -23,6 +24,9 @@ public class ProductResponse {
     CategoryResponse category;
     String origin;
     Double discount;
+    int soldQuantity;
+    Instant createdDate;
+
     List<ProductImageResponse> images;
 
 

@@ -1,9 +1,13 @@
 package com.thanhdon.product_service.dto.request;
 
+import com.thanhdon.product_service.entity.Category;
+import com.thanhdon.product_service.entity.ProductImage;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 
@@ -17,12 +21,11 @@ public class ProductCreationRequest {
     String name;
     String code;
     String description;
-    BigDecimal price;
-    String material;
     Long categoryId;
-    String origin;
-    Double discount;
-    List<ProductImageCreationRequest> images ;
+    @OneToMany
+    List<ProductImage> images;
+    Instant createdDate;
+    Instant updatedDate;
 
 
 

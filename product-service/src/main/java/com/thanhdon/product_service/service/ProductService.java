@@ -1,6 +1,7 @@
 package com.thanhdon.product_service.service;
 
 
+import com.thanhdon.product_service.dto.PageResponse;
 import com.thanhdon.product_service.dto.request.ProductCreationRequest;
 import com.thanhdon.product_service.dto.response.ProductResponse;
 import com.thanhdon.product_service.entity.Product;
@@ -15,6 +16,9 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -80,8 +84,19 @@ public class ProductService {
         return productMapper.toProductResponse(productRepository.save(product));
     }
 
-    public List<ProductResponse> getAllProducts(){
-        return productRepository.findAll().stream().map(productMapper::toProductResponse).toList();
+    public PageResponse<ProductResponse> getAllProducts(int page, int size){
+
+        Sort sort = Sort.by("createdDate").descending();
+
+        Pageable pageable = PageRequest.of(page-1,size, sort);
+
+
+
+        return null;
+
+
+
+//        return productRepository.findAll().stream().map(productMapper::toProductResponse).toList();
     }
     public void deleteProductById(Long id){
         if(!productRepository.existsById(id)) throw new RuntimeException("product not found");

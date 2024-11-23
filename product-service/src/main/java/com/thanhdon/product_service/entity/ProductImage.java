@@ -16,16 +16,14 @@ import java.util.List;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long imageId;
-
     String url;
-    String color;
-    @OneToMany(mappedBy = "productImage", cascade = CascadeType.ALL)
-    List<Size> sizes;
     Boolean isMain ;
-
     @ManyToOne
     @JoinColumn(name = "product_id",nullable = false)
     Product product;
+    @ManyToOne
+    @JoinColumn(name = "product_variant_id")
+    ProductVariant productVariant;
 
 
 }
