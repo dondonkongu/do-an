@@ -3,7 +3,6 @@ package com.thanhdon.product_service.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-
 import java.util.List;
 
 
@@ -12,14 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductCreationRequest {
+public class ProductUpdateRequest {
     String name;
-    String code;
     String description;
-    Long categoryId;
-    Integer totalSold;
 
-    List<ProductImageCreationRequest> images;
+
 
 
 

@@ -6,10 +6,14 @@ import com.thanhdon.product_service.entity.ProductImage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+
 @Mapper(componentModel = "spring")
 public interface ProductImageMapper {
+
     ProductImage toProductImage(ProductImageCreationRequest request);
 
+    @Mapping(source = "imageId", target = "id")
     ProductImageResponse toProductImageResponse(ProductImage productImage);
+
 }
 

@@ -24,11 +24,12 @@ public class Product {
     String name;
     String code;
     String description;
+    Integer totalSold;
     @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<ProductImage> images;
+    List<ProductImage> images = new ArrayList<>();
 
     Instant createdDate;
     Instant updatedDate;
