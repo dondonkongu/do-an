@@ -96,7 +96,7 @@ public class ProductService {
     public ProductResponse getProductById(Long id){
         return productMapper.toProductResponse(productRepository.findById(id).orElseThrow(()->new AppException(ErrorCode.PRODUCT_NOT_EXISTED)));
     }
-//
+
     public ProductResponse updateProductById(Long id, ProductUpdateRequest request) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_EXISTED));
@@ -109,11 +109,18 @@ public class ProductService {
         if(!productRepository.existsById(id)) throw new AppException(ErrorCode.PRODUCT_NOT_EXISTED);
         productRepository.deleteById(id);
     }
+
     public List<ProductResponse> searchByName(String name){
         return productRepository.findByNameLike(name).stream()
                 .map(productMapper::toProductResponse)
                 .toList();
     }
+
+    public List<ProductResponse> filter(List<String> color, List<String> size){
+        var productLists = productRepository.findProductByVariantAttributes(color,size);
+        return productMapper.toProductResponseList(productLists);
+    }
+
 
 
 }

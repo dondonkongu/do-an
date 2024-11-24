@@ -6,6 +6,8 @@ import com.thanhdon.product_service.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 
 @Mapper(componentModel = "spring", uses = {ProductImageMapper.class})
 public interface ProductMapper {
@@ -14,4 +16,6 @@ public interface ProductMapper {
 
     @Mapping(target = "images", source = "images")
     ProductResponse toProductResponse(Product product);
+
+    List<ProductResponse> toProductResponseList(List<Product> productList);
 }
