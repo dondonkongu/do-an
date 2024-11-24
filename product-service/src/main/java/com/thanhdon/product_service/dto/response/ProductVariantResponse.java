@@ -20,8 +20,6 @@ public class ProductVariantResponse {
     Integer sold;
     Double price;
     String sku;
-    Instant createdDate;
-    Instant updatedDate;
 
 
 

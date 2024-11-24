@@ -25,6 +25,7 @@ public class ProductVariant {
     @JoinColumn(name = "product_id")
     Product product;
     String color;
+    String size;
     Integer stock;
     Integer sold;
     Double price;

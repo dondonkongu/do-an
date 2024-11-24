@@ -30,7 +30,6 @@ public class Product {
     Category category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductImage> images = new ArrayList<>();
-
     Instant createdDate;
     Instant updatedDate;
 
