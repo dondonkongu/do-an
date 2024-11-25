@@ -1,6 +1,5 @@
 package com.thanhdon.order_service.dto.response;
 
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,12 +11,13 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderResponse {
-    Long orderId;
-    Long userId;
-    List<OrderItemResponse> items;
-    Double totalPrice;
-    String shippingAddress;
-
+public class ProductVariantResponse {
+    Long id;
+    String color;
+    String size;
+    Integer stock;
+    Integer sold;
+    Double price;
+    String sku;
 }
 

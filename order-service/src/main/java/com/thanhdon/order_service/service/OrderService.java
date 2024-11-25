@@ -1,79 +1,77 @@
 package com.thanhdon.order_service.service;
 
 import com.thanhdon.order_service.constant.Status;
-import com.thanhdon.order_service.dto.ApiResponse;
+import com.thanhdon.order_service.dto.request.OrderItemRequest;
 import com.thanhdon.order_service.dto.request.OrderRequest;
+import com.thanhdon.order_service.dto.request.ReduceStockRequest;
 import com.thanhdon.order_service.dto.response.OrderResponse;
-import com.thanhdon.order_service.entity.Item;
-import com.thanhdon.order_service.entity.Orders;
-import com.thanhdon.order_service.mapper.ItemMapper;
+import com.thanhdon.order_service.dto.response.ProductVariantResponse;
+
+import com.thanhdon.order_service.entity.Order;
+import com.thanhdon.order_service.entity.OrderItem;
 import com.thanhdon.order_service.mapper.OrderMapper;
 import com.thanhdon.order_service.repository.OrderRepository;
+import com.thanhdon.order_service.repository.httpclient.ProductClient;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OrderService {
-
+    ProductClient productClient;
     OrderRepository orderRepository;
     OrderMapper orderMapper;
-    ItemMapper itemMapper;
 
     public OrderResponse createOrder(OrderRequest request) {
-        Orders order = orderMapper.toOrder(request);
-        order.setStatus(Status.PENDING.getStatus());
+        Order order = orderMapper.toOrder(request);
+        order.setStatus(Status.PENDING);
+        order.setOrderDate(LocalDateTime.now());
 
-        // Chuyển các items từ request sang entity Item
-        List<Item> items = itemMapper.toItemList(request.getItems());
-        items.forEach(item -> item.setOrder(order));  // Liên kết order với item
+        double total = 0;
 
-        // Gán items vào order trước khi tính toán tổng giá trị
-        order.setItems(items);
+        List<OrderItem> orderItemList = new ArrayList<>();
 
-        // Tính tổng giá trị của đơn hàng
-        BigDecimal totalPrice = items.stream()
-                .map(Item::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        order.setTotalPrice(totalPrice.add(request.getShippingFee()));
+        for (OrderItemRequest itemRequest  : request.getItems()){
+            ProductVariantResponse productVariant = productClient.getProductVariantById(itemRequest.getVariantId());
+            log.info("ProductVariant: {}", productVariant);
 
-        // Lưu đơn hàng vào cơ sở dữ liệu
-        Orders savedOrder = orderRepository.save(order);
+            if (productVariant.getStock()< itemRequest.getQuantity()){
+                throw new IllegalArgumentException("Không đủ hàng cho sản phẩm");
+            }
 
-        return orderMapper.toOrderResponse(savedOrder);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setVariantId(productVariant.getId());
+            orderItem.setPrice(productVariant.getPrice() * itemRequest.getQuantity());
+            orderItem.setQuantity(itemRequest.getQuantity());
+            orderItem.setOrder(order);
+
+            orderItemList.add(orderItem);
+            total=+orderItem.getPrice();
+
+        }
+        order.setOrderItems(orderItemList);
+        order.setTotalPrice(total);
+        Order savedOrder = orderRepository.save(order);
+
+
+        for (OrderItem item : savedOrder.getOrderItems()){
+
+            productClient.reduceStock(new ReduceStockRequest(item.getVariantId(), item.getQuantity()));
+        }
+
+      return orderMapper.toOrderResponse(savedOrder);
     }
 
-    public OrderResponse getOrderById(String orderId) {
-        Orders order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
-        return orderMapper.toOrderResponse(order);
-    }
 
-
-    public List<OrderResponse> getAllOrders() {
-        return orderRepository.findAll().stream()
-                .map(orderMapper::toOrderResponse)
-                .collect(Collectors.toList());
-    }
-
-    public OrderResponse updateOrder(String orderId,String status){
-        Orders order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
-
-        order.setStatus(status);
-        return orderMapper.toOrderResponse(order);
-    }
-
-    public List<OrderResponse> getAllOrdersByUserId(String userId) {
-       return orderRepository.findAllByUserId(userId).stream().map(orderMapper::toOrderResponse).toList();
-
-    }
 
 }

@@ -2,6 +2,7 @@ package com.thanhdon.product_service.service;
 
 
 import com.thanhdon.product_service.dto.request.ProductVariantRequest;
+import com.thanhdon.product_service.dto.request.ReduceStockRequest;
 import com.thanhdon.product_service.dto.response.ProductVariantResponse;
 import com.thanhdon.product_service.entity.ProductVariant;
 import com.thanhdon.product_service.exception.AppException;
@@ -67,6 +68,12 @@ public class ProductVariantService {
         ProductVariant variant = productVariantRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.VARIANT_NOT_EXISTED));
         productVariantRepository.delete(variant);
+    }
+
+    public void reduceStock(ReduceStockRequest request){
+        ProductVariant variant = productVariantRepository.findById(request.getProductVariantId())
+                .orElseThrow(() -> new AppException(ErrorCode.VARIANT_NOT_EXISTED));
+        variant.setStock(variant.getStock()- request.getQuantity());
     }
 
 
