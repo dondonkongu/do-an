@@ -14,11 +14,7 @@ import java.util.List;
 public class ProductUpdateRequest {
     String name;
     String description;
-
-
-
-
-
-
+    Long categoryId;
+    Double price;
 }
 

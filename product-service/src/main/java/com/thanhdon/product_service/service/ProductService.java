@@ -34,7 +34,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @Slf4j
 public class ProductService {
-    ProductImageMapper productImageMapper;
     CategoryRepository categoryRepository;
     ProductRepository productRepository;
     ProductMapper productMapper;
@@ -77,6 +76,8 @@ public class ProductService {
                 .data(pageData.getContent().stream().map(productMapper::toProductResponse).toList())
                 .build();
     }
+
+
     public PageResponse<ProductResponse> getProducts(int page, int size, String sortField) {
         Sort sort = (sortField != null && !sortField.isEmpty())
                 ? Sort.by(sortField).descending()
@@ -102,6 +103,11 @@ public class ProductService {
                 .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_EXISTED));
         product.setName(request.getName());
         product.setDescription(request.getDescription());
+        var category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_EXISTED));
+        product.setCategory(category);
+        product.setPrice(request.getPrice());
+
         return productMapper.toProductResponse(productRepository.save(product));
     }
 

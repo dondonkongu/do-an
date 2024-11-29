@@ -19,6 +19,7 @@ public class ProductResponse {
     String name;
     String code;
     String description;
+    Double price;
     Integer totalSold;
     CategoryResponse category;
     Instant createdDate;

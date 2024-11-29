@@ -28,8 +28,7 @@ public class ProductVariant {
     String size;
     Integer stock;
     Integer sold;
-    Double price;
-    String sku;
+
 
 
 

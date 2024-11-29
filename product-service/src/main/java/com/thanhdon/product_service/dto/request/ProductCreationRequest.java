@@ -16,6 +16,7 @@ public class ProductCreationRequest {
     String name;
     String code;
     String description;
+    Double price;
     Long categoryId;
     Integer totalSold;
 

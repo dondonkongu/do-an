@@ -4,6 +4,7 @@ package com.thanhdon.product_service.service;
 import com.thanhdon.product_service.dto.request.ProductVariantRequest;
 import com.thanhdon.product_service.dto.request.ReduceStockRequest;
 import com.thanhdon.product_service.dto.response.ProductVariantResponse;
+import com.thanhdon.product_service.entity.Product;
 import com.thanhdon.product_service.entity.ProductVariant;
 import com.thanhdon.product_service.exception.AppException;
 import com.thanhdon.product_service.exception.ErrorCode;
@@ -31,7 +32,11 @@ public class ProductVariantService {
     ProductRepository productRepository;
 
     public ProductVariantResponse create(ProductVariantRequest request){
+        Product product = productRepository.findById(request.getProductId())
+                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_EXISTED));
+
         ProductVariant productVariant = productVariantMapper.toProductVariant(request);
+        productVariant.setProduct(product);
         return productVariantMapper.toProductVariantResponse(productVariantRepository.save(productVariant));
     }
 
@@ -46,8 +51,7 @@ public class ProductVariantService {
         productVariant.setColor(request.getColor());
         productVariant.setSize(request.getSize());
         productVariant.setStock(request.getStock());
-        productVariant.setPrice(request.getPrice());
-        productVariant.setSku(request.getSku());
+
     return productVariantMapper.toProductVariantResponse(productVariantRepository.save(productVariant));
     }
 

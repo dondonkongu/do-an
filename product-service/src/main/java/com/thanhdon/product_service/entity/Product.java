@@ -23,6 +23,7 @@ public class Product {
     Long id;
     String name;
     String code;
+    Double price;
     String description;
     Integer totalSold;
     @ManyToOne
@@ -30,6 +31,10 @@ public class Product {
     Category category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductImage> images = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductVariant> variants = new ArrayList<>();
+
     Instant createdDate;
     Instant updatedDate;
 

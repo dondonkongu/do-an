@@ -19,8 +19,7 @@ public class ProductVariantRequest {
     String size;
     Integer stock;
     Integer sold;
-    Double price;
-    String sku;
+
 
 
 
