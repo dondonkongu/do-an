@@ -23,8 +23,8 @@ public interface OrderMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "orderDate", ignore = true)
-    @Mapping(target = "totalPrice", ignore = true)
     @Mapping(target = "orderItems", ignore = true)
+
     Order toOrder(OrderRequest orderRequest);
 }
 

@@ -20,7 +20,8 @@ public class UserCreationRequest {
 
     @Size(min = 6, message = "INVALID_PASSWORD")
     String password;
-
+    @Size(min = 10,max = 10, message = "INVALID_PHONE_NUMBER")
+    String phoneNumber;
     String firstName;
     String lastName;
     String address;

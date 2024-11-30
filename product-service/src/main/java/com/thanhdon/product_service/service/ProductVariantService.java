@@ -40,6 +40,10 @@ public class ProductVariantService {
         return productVariantMapper.toProductVariantResponse(productVariantRepository.save(productVariant));
     }
 
+    public List<ProductVariantResponse> getAll(){
+        return productVariantMapper.toVariantResponseList(productVariantRepository.findAll());
+    }
+
 
     public ProductVariantResponse update(Long id, ProductVariantRequest request){
         productRepository.findById(request.getProductId())
@@ -78,6 +82,7 @@ public class ProductVariantService {
         ProductVariant variant = productVariantRepository.findById(request.getProductVariantId())
                 .orElseThrow(() -> new AppException(ErrorCode.VARIANT_NOT_EXISTED));
         variant.setStock(variant.getStock()- request.getQuantity());
+        System.out.print("da reduce");
     }
 
 

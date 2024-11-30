@@ -36,31 +36,22 @@ public class OrderService {
         Order order = orderMapper.toOrder(request);
         order.setStatus(Status.PENDING);
         order.setOrderDate(LocalDateTime.now());
-
-        double total = 0;
-
+        order.setTotalPrice(request.getTotalPrice());
         List<OrderItem> orderItemList = new ArrayList<>();
-
         for (OrderItemRequest itemRequest  : request.getItems()){
             ProductVariantResponse productVariant = productClient.getProductVariantById(itemRequest.getVariantId());
             log.info("ProductVariant: {}", productVariant);
 
-            if (productVariant.getStock()< itemRequest.getQuantity()){
-                throw new IllegalArgumentException("Không đủ hàng cho sản phẩm");
-            }
 
             OrderItem orderItem = new OrderItem();
             orderItem.setVariantId(productVariant.getId());
-            orderItem.setPrice(productVariant.getPrice() * itemRequest.getQuantity());
             orderItem.setQuantity(itemRequest.getQuantity());
             orderItem.setOrder(order);
 
             orderItemList.add(orderItem);
-            total=+orderItem.getPrice();
 
         }
         order.setOrderItems(orderItemList);
-        order.setTotalPrice(total);
         Order savedOrder = orderRepository.save(order);
 
 

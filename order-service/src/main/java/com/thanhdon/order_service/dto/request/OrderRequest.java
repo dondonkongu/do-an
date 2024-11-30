@@ -12,8 +12,11 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderRequest {
-    Long userId;
+    String userId;
+    Double totalPrice;
     List<OrderItemRequest> items;
+    String phoneNumber;
     String shippingAddress;
+    String note;
 
 }

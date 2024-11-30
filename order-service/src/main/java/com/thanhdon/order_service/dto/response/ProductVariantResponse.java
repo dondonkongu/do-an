@@ -17,7 +17,6 @@ public class ProductVariantResponse {
     String size;
     Integer stock;
     Integer sold;
-    Double price;
-    String sku;
+
 }
 

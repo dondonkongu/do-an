@@ -22,13 +22,14 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Long userId;
+    String userId;
     @Enumerated(EnumType.STRING)
     Status status;
-
+    String phoneNumber;
     LocalDateTime orderDate;
     Double totalPrice;
     String shippingAddress;
+    String note;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItem> orderItems = new ArrayList<>();
 

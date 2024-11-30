@@ -49,6 +49,12 @@ public class ProductVariantController {
                 .result(productVariantService.getAllVariantByProductId(productId))
                 .build();
     }
+    @GetMapping()
+    ApiResponse<List<ProductVariantResponse>> getAll() {
+        return ApiResponse.<List<ProductVariantResponse>>builder()
+                .result(productVariantService.getAll())
+                .build();
+    }
 
     @DeleteMapping("/{id}")
     ApiResponse<Void> deleteVariant(@PathVariable Long id) {

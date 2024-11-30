@@ -12,6 +12,6 @@ import lombok.experimental.FieldDefaults;
 public class OrderItemResponse {
     Long variantId;
     int quantity;
-    Double price;
+
 
 }

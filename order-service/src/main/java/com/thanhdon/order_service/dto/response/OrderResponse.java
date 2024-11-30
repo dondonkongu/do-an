@@ -14,7 +14,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderResponse {
     Long orderId;
-    Long userId;
+    String userId;
+    String phoneNumber;
+    String note;
     List<OrderItemResponse> items;
     Double totalPrice;
     String shippingAddress;
