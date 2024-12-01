@@ -122,9 +122,13 @@ public class ProductService {
                 .toList();
     }
 
-    public List<ProductResponse> filter(List<String> color, List<String> size){
-        var productLists = productRepository.findProductByVariantAttributes(color,size);
+    public List<ProductResponse> filter(List<Long> categoryId, List<Long> subcategoryId, List<String> color, List<String> size){
+        var productLists = productRepository.findProductByVariantAttributes(categoryId,subcategoryId,color,size);
         return productMapper.toProductResponseList(productLists);
+    }
+    public List<ProductResponse> getProductBySubCategory(Long id){
+         var products = productRepository.findBySubCategoryId(id);
+         return productMapper.toProductResponseList(products);
     }
 
 

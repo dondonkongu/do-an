@@ -9,6 +9,7 @@ public enum ErrorCode {
     PRODUCT_EXISTED(1001,"product is existed!",HttpStatus.BAD_REQUEST),
     PRODUCT_NOT_EXISTED(1002,"product not existed!", HttpStatus.NOT_FOUND),
     CATEGORY_NOT_EXISTED(1010,"category not existed!!",HttpStatus.NOT_FOUND),
+    SUB_CATEGORY_NOT_EXISTED(1011,"sub category not existed!!",HttpStatus.NOT_FOUND),
     VARIANT_NOT_EXISTED(1020,"product variant  not existed!!",HttpStatus.NOT_FOUND),
     DUPLICATE_PRODUCTS_COLLECTION(1003,"duplicate id products", HttpStatus.BAD_REQUEST)
     ;

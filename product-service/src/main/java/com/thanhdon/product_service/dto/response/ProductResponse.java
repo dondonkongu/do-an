@@ -22,6 +22,7 @@ public class ProductResponse {
     Double price;
     Integer totalSold;
     CategoryResponse category;
+    SubCategoryResponse subCategory;
     Instant createdDate;
     Instant updatedDate;
     List<ProductImageResponse> images;

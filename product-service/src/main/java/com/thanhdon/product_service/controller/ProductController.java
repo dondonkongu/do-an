@@ -80,10 +80,20 @@ public class ProductController {
                 .build();
     }
     @GetMapping("/filter")
-    ApiResponse<List<ProductResponse>> filter(@RequestParam(required = false) List<String> color,
-                                              @RequestParam(required = false) List<String> size){
+    ApiResponse<List<ProductResponse>> filter(
+            @RequestParam(required = false) List<Long> categoryId,
+            @RequestParam(required = false) List<Long> subcategoryId,
+            @RequestParam(required = false) List<String> color,
+            @RequestParam(required = false) List<String> size
+                                              ){
         return ApiResponse.<List<ProductResponse>>builder()
-                .result(productService.filter(color,size))
+                .result(productService.filter(categoryId,subcategoryId,color,size))
+                .build();
+    }
+    @GetMapping("/subcategory/{subcategoryId}")
+    ApiResponse<List<ProductResponse>> findBySubcategoryId(@PathVariable Long subcategoryId){
+        return ApiResponse.<List<ProductResponse>>builder()
+                .result(productService.getProductBySubCategory(subcategoryId))
                 .build();
     }
 }
