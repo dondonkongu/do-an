@@ -96,4 +96,10 @@ public class ProductController {
                 .result(productService.getProductBySubCategory(subcategoryId))
                 .build();
     }
+    @GetMapping("/category/{categoryId}")
+    ApiResponse<List<ProductResponse>> findByCategoryId(@PathVariable Long categoryId){
+        return ApiResponse.<List<ProductResponse>>builder()
+                .result(productService.getProductByCategory(categoryId))
+                .build();
+    }
 }

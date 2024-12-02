@@ -130,6 +130,10 @@ public class ProductService {
          var products = productRepository.findBySubCategoryId(id);
          return productMapper.toProductResponseList(products);
     }
+    public List<ProductResponse> getProductByCategory(Long id){
+        var products = productRepository.findByCategoryId(id);
+        return productMapper.toProductResponseList(products);
+    }
 
 
 
