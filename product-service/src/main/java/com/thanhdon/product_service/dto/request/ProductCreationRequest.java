@@ -19,6 +19,7 @@ public class ProductCreationRequest {
     Double price;
     Long categoryId;
     Integer totalSold;
+    String material;
     Long subCategoryId;
     List<ProductImageCreationRequest> images;
 

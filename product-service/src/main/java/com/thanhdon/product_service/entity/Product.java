@@ -24,6 +24,7 @@ public class Product {
     String name;
     String code;
     Double price;
+    String material;
     String description;
     Integer totalSold;
     @ManyToOne
