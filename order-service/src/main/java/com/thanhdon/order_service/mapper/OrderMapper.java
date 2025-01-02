@@ -20,8 +20,7 @@ public interface OrderMapper {
     OrderItemResponse toOrderItemResponse(OrderItem orderItem);
 
     // Ánh xạ từ OrderRequest sang Order, bỏ qua các trường sẽ được gán trong service
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "status", ignore = true)
+
     @Mapping(target = "orderDate", ignore = true)
     @Mapping(target = "orderItems", ignore = true)
 

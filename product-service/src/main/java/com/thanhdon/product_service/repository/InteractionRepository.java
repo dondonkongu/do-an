@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface InteractionRepository extends JpaRepository<Interaction,Long> {
 
-    List<Interaction> findByUserIdAndProductIdAndInteractionTimeAfter(
-            Long userId, Long productId, LocalDateTime interactionTime
+    List<Interaction> findByUserIdAndProductId(
+            String userId, Long productId
     );
 }
 //SELECT *

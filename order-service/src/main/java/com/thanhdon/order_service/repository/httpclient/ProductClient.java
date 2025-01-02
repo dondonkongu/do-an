@@ -1,5 +1,6 @@
 package com.thanhdon.order_service.repository.httpclient;
 
+import com.thanhdon.order_service.dto.ApiResponse;
 import com.thanhdon.order_service.dto.request.ReduceStockRequest;
 import com.thanhdon.order_service.dto.response.ProductVariantResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -16,6 +17,6 @@ public interface ProductClient {
     ProductVariantResponse getProductVariantById(@PathVariable("variantId") Long variantId);
 
     @PostMapping("variants/reduce-stock")
-    void reduceStock(@RequestBody ReduceStockRequest request);
+    ApiResponse<Void> reduceStock(@RequestBody ReduceStockRequest request);
 
 }

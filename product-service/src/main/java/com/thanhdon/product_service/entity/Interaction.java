@@ -20,7 +20,7 @@ public class Interaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Long userId;
+    String userId;
     Long productId;
     Boolean viewed;
     Boolean purchased;

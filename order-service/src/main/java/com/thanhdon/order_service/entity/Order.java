@@ -23,8 +23,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String userId;
-    @Enumerated(EnumType.STRING)
-    Status status;
+
+    String status;
     String phoneNumber;
     LocalDateTime orderDate;
     Double totalPrice;

@@ -52,7 +52,6 @@ public class ProductController {
                 .build();
     }
 
-
     @GetMapping("/{productId}")
     ApiResponse<ProductResponse> getProductById(@PathVariable Long productId ){
         return ApiResponse.<ProductResponse>builder()
@@ -100,6 +99,12 @@ public class ProductController {
     ApiResponse<List<ProductResponse>> findByCategoryId(@PathVariable Long categoryId){
         return ApiResponse.<List<ProductResponse>>builder()
                 .result(productService.getProductByCategory(categoryId))
+                .build();
+    }
+    @GetMapping("/productVariantId/{productVariantId}")
+    ApiResponse<ProductResponse> getProductByProductVariantId(@PathVariable Long productVariantId ){
+        return ApiResponse.<ProductResponse>builder()
+                .result(productService.getProductByProductVariantId(productVariantId))
                 .build();
     }
 }

@@ -37,7 +37,7 @@ public class Product {
     List<ProductImage> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductVariant> variants = new ArrayList<>();
+    List<ProductVariant> variants = new ArrayList<>();
 
     Instant createdDate;
     Instant updatedDate;

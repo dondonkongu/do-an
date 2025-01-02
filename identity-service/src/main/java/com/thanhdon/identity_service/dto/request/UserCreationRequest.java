@@ -22,6 +22,7 @@ public class UserCreationRequest {
     String password;
     @Size(min = 10,max = 10, message = "INVALID_PHONE_NUMBER")
     String phoneNumber;
+    String gender;
     String firstName;
     String lastName;
     String address;

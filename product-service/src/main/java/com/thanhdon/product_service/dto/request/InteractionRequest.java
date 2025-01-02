@@ -3,6 +3,8 @@ package com.thanhdon.product_service.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 
 @Data
 @Builder
@@ -10,10 +12,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class InteractionRequest {
-    Long userId;
+    String userId;
     Long productId;
     Boolean viewed;
     Boolean purchased;
+
 
 
 

@@ -82,6 +82,7 @@ public class ProductVariantService {
         ProductVariant variant = productVariantRepository.findById(request.getProductVariantId())
                 .orElseThrow(() -> new AppException(ErrorCode.VARIANT_NOT_EXISTED));
         variant.setStock(variant.getStock()- request.getQuantity());
+        productVariantRepository.save(variant);
         System.out.print("da reduce");
     }
 

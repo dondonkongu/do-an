@@ -21,18 +21,19 @@ import java.util.List;
 public class InteractionService {
     InteractionMapper interactionMapper;
     InteractionRepository interactionRepository;
-    int SPAM= 10;
 
     public String saveInteraction(InteractionRequest request){
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime time = now.minusMinutes(SPAM);
 
-        List<Interaction> recentInteraction = interactionRepository.findByUserIdAndProductIdAndInteractionTimeAfter(request.getUserId(), request.getProductId(), time);
+
+        List<Interaction> recentInteraction = interactionRepository.findByUserIdAndProductId(request.getUserId(), request.getProductId());
         if(!recentInteraction.isEmpty()){
-            return "Tương tác đã được ghi lại gần đây";
+            return "Tương tác đã được ghi lại ";
         }
         Interaction interaction = interactionMapper.toInteraction(request);
+        interaction.setInteractionTime(now);
         interactionRepository.save(interaction);
+
         return "tuong tac da duoc luu";
     }
 }

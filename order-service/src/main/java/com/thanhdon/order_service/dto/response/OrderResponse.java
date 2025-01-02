@@ -1,6 +1,7 @@
 package com.thanhdon.order_service.dto.response;
 
 
+import com.thanhdon.order_service.constant.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -17,6 +18,7 @@ public class OrderResponse {
     String userId;
     String phoneNumber;
     String note;
+    String status;
     List<OrderItemResponse> items;
     Double totalPrice;
     String shippingAddress;

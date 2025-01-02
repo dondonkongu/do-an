@@ -1,8 +1,10 @@
 package com.thanhdon.order_service.service;
 
+import ch.qos.logback.classic.spi.IThrowableProxy;
 import com.thanhdon.order_service.constant.Status;
 import com.thanhdon.order_service.dto.request.OrderItemRequest;
 import com.thanhdon.order_service.dto.request.OrderRequest;
+import com.thanhdon.order_service.dto.request.OrderStatusUpdate;
 import com.thanhdon.order_service.dto.request.ReduceStockRequest;
 import com.thanhdon.order_service.dto.response.OrderResponse;
 import com.thanhdon.order_service.dto.response.ProductVariantResponse;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -34,7 +37,7 @@ public class OrderService {
 
     public OrderResponse createOrder(OrderRequest request) {
         Order order = orderMapper.toOrder(request);
-        order.setStatus(Status.PENDING);
+        order.setStatus("PENDING");
         order.setOrderDate(LocalDateTime.now());
         order.setTotalPrice(request.getTotalPrice());
         List<OrderItem> orderItemList = new ArrayList<>();
@@ -61,6 +64,19 @@ public class OrderService {
         }
 
       return orderMapper.toOrderResponse(savedOrder);
+    }
+    public String updateOrder(Long orderId, OrderStatusUpdate request){
+        Order order = orderRepository.findById(orderId).orElseThrow(()-> new RuntimeException("order not found"));
+        order.setStatus(request.getStatus());
+        orderRepository.save(order);
+        return "update successfully!!";
+    }
+    public List<OrderResponse> getAllOrders(){
+        return orderRepository.findAll().stream().map(orderMapper::toOrderResponse).collect(Collectors.toList());
+    }
+
+    public List<OrderResponse> getOrderByUserId(String userId){
+       return orderRepository.findOrdersByUserId(userId).stream().map(orderMapper::toOrderResponse).toList();
     }
 
 
