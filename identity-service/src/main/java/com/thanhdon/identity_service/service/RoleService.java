@@ -9,9 +9,6 @@ import com.thanhdon.identity_service.mapper.RoleMapper;
 import com.thanhdon.identity_service.repository.PermissionRepository;
 import com.thanhdon.identity_service.repository.RoleRepository;
 import org.springframework.stereotype.Service;
-
-
-
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,10 +25,8 @@ public class RoleService {
 
     public RoleResponse create(RoleRequest request) {
         var role = roleMapper.toRole(request);
-
         var permissions = permissionRepository.findAllById(request.getPermissions());
         role.setPermissions(new HashSet<>(permissions));
-
         role = roleRepository.save(role);
         return roleMapper.toRoleResponse(role);
     }
